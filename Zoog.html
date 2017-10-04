@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+    
+    <script>
+        function setup() {
+            createCanvas(600,600);
+
+        }
+
+        function draw() {
+        //Background color    
+        background("green");
+        
+        //The outline of the head
+        strokeWeight(5);
+        
+        //Color of face
+        fill("yellow");
+        
+        //Color of the outline of the head
+        stroke("pink")
+        
+        //The mode of the circle for the head
+        ellipseMode(CENTER);
+        
+        //The position of the circle for the head
+        ellipse(300,150,200,200);
+        
+        //Color of eyes
+        fill("red");
+        
+        //Left and Right eyes
+        strokeWeight(0);
+        ellipse(250,120,50,50);
+        ellipse(350,120,50,50);
+        
+        //The thickness of the left and right eyebrows 
+        strokeWeight(6);
+        
+        //The outline color of the left and right eyebrows
+        stroke("black");
+        
+        //Position of the left and right eyebrows
+        line(240,80,280,90);
+        line(325,90,360,78);
+        
+        //The thickness of the stick of the lollipop
+        strokeWeight(10);
+        
+        //The color of the stick of the lollopop
+        stroke("pink");
+        
+        //The position of the stick
+        line(300,255,300,400);
+        
+        //The outline color of the text 
+        stroke("red");
+        
+        //Text size for the bottom, bottom left and right texts
+        textSize(35);
+        
+        //The color of the text
+        fill("black");
+        
+        //What the texts are and their position
+        text("COME HAVE A TASTE HEHEHE",50,500);
+        text("I DARE YOU!",60,400);
+        text("MUWAHAHAHA",350,400);
+        
+        //Text size for the text all the way at the top middle
+        textSize(30);
+        
+        //What the text is and it's position
+        text("Don't I look cute?",190,30);
+  
+        //The mode of the rectance at the bottom middle of the sketch
+        rectMode(CORNER);
+        
+        /*Dont color the space inside the rectangle, if I don't add this the space inside the rectangle 
+        will be white and it will cover up the green background. This is because the computer reads the 
+        codes from top to bottom */
+        noFill();
+        
+        //Make the outline of the rectangle red
+        stroke("red");
+        
+        //Position of the rectangle
+        rect(40,460,550,60);
+        
+        //Thickness of the triangular face
+        strokeWeight(6);
+        
+        //Color of the triangular face
+        stroke("black");
+        
+        //Position of the triangular face
+        triangle(250,180,300,240,350,180);
+        
+        //Color of the outline of the left and right arms
+        stroke("pink");
+        
+        //Thickness of the left and right arms
+        strokeWeight(10);
+        
+        //Position of the left and right arms
+        line(300,350,180,240);
+        line(300,350,420,240);
+        
+        //Color of the outline of the teeth
+        stroke("black");
+        
+        //Thickness of the outline
+        strokeWeight(4);
+        
+        //The mode for the rectangular teeth
+        rectMode(CORNER);
+        
+        //Position of the teeth
+        rect(280,180,40,25);
+        
+        
+        
+        }
+    </script>
+</head>
+
+<body>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/mingleg7756/p5js/blob/gh-pages/Zoog.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+</html>
