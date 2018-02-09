@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <title>p5js Template</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+    
+    <script>
+        //The array where all of the obstacles that I am creating is going to be stored
+        var objects = [];
+        
+        //The X-value of the game character
+        var characterX;
+        
+        //The Y-value of the game character
+        var characterY;
+        
+        //How quickly the game character is going to jump and fall back down
+        var jumpSpeed;
+        
+        //The score
+        var score;
+        
+        //Highest score the player gets
+        var highestScore;
+        
+        //Queen Y-Value
+        var queenY;
+        
+        //Queen X-value
+        var queenX;
+        
+        //The moving of the queen
+        var queenSpeed;
+        var queenSpeed2;
+        
+        function preload() {
+            character = loadImage("p5js/showmedewae.png");
+            queen = loadImage("p5js/queen.png");
+          
+        }
+        function setup() {
+            //The canvas of the game
+            createCanvas(750,400);
+            
+            //The X-value of the game character
+            characterX = width - 80;
+            
+            //The Y-value of the game character
+            characterY = height - 42.25;
+            
+            //Setting the jumping speed to 0
+            jumpSpeed = 0;
+            
+            //Setting the highest score to 0 when the game first started
+            highestScore = 0
+            
+            //Setting the score to 0 when the game first started
+            score = 0
+            
+            //The Y-value of the Queen
+            queenY = 250;
+            
+            //The X-value of the queen
+            queenX = 50;
+            
+            //How fast the queen is moving
+            queenSpeed = -1;
+            queenSpeed2 = +1
+            
+            
+        }
+
+        function draw() {
+            //The color of the background
+            background("pink");
+            
+            //The color of the outline of the ball (game character)
+            stroke(0);
+            
+            //The color of the inner part of the ball (game character)
+            fill(255);
+            
+            //What is game character is 
+            imageMode(CENTER);
+            image(character, characterX, characterY, character.width, character.height);
+            
+            //The Queen, added for entertainment purposes
+            image(queen, queenX, queenY, queen.width, queen.height);
+            
+            //The color of the outline of the text
+            stroke("pink");
+            
+            //The color of the word of the text "Highest Score"
+            fill("yellow");
+            
+            //The style of the text
+            textStyle(BOLD);
+            
+            //The size of the text
+            textSize(30);
+            
+            //The text will be align to the center
+            textAlign(CENTER);
+            
+            //What the text "Highest Score" is and the coordinate where it will be displayed
+            text("WORLD RECORD: " + highestScore, width/2, 50);
+            
+            //The color of the word of the text " Score"
+            fill("white");
+            
+            //What the text "Score" is and the coordinate where it will be displayed
+            text("Current Score: " + score, width/2, 80);
+            
+            fill("red")
+            textSize(20);
+            text("Show me de wae \n to your heart ! \n My Queen~", characterX - 10, characterY - 100 );
+            
+            //How fast the game character will jump up and down
+            characterY += jumpSpeed;  
+            
+            //Queen moving
+            queenY += queenSpeed;
+            queenX += queenSpeed2;
+            
+            //The rate which the score will increase
+            score += 1
+            
+            //If the player's score reach a new record, the "Highest Score" will be changed
+            //to that score
+            if (score > highestScore) {
+                highestScore = score;
+            }
+            
+            //If the game character's Y-value is at the ground level jumpSpeed will be 0 meaning that it 
+            //will stay at the height
+            if(characterY >= height - 42.25) {
+                jumpSpeed = 0;
+            }
+            
+            //If the character's Y-value is 
+            if(characterY <= height - 164) {
+                jumpSpeed += 7;             
+            }
+            
+            //The computer will constantly generate a number and if that number is less than 1
+            //a new obstacle will be create and stored in the objects array
+            var rand = random(0, 60);
+            if(rand < 1) {
+                objects.push(new Object);
+            }
+            
+            //console.log(rand);
+            
+            if(queenY >= 250) {
+                queenSpeed = -1;
+            }
+            
+            if(queenY <= 50) {
+                queenSpeed = +1;
+            }
+            
+            if(queenX >= 200) {
+                queenSpeed2 = -1;
+            }
+            
+            if(queenX <= 50) {
+                queenSpeed2 = +1;
+            }
+            for(var i = 0; i < objects.length; i++) {
+                console.log("CharacterY: " + characterY)
+                console.log("object y : " + objects[i].y)
+                objects[i].move();
+                objects[i].color();
+                objects[i].display();
+                objects[i].collide();
+            }
+        }
+            
+            
+        function keyPressed() {
+            //If key "enter" is pressed the game character will jump upward
+            if(keyCode == ENTER) {
+                jumpSpeed -= 7;
+            }
+            
+            //If key "o" is pressed the score will set back to 0
+            if(key.toLowerCase() == "o") {
+                score = 0;
+            }
+        }
+        
+        function Object() {
+          this.x = 20;
+          this.y = height - 20;
+          this.speed = 4;
+          
+          this.move = function() {
+            this.x += this.speed;
+            if(this.x > width) {
+                this.speed = 4;
+            }
+            
+          }
+          
+          this.display = function() {
+            line(this.x, this.y, this.x, this.y - 40);
+            
+          }
+          
+          this.color = function() {
+              stroke("red");
+          }
+          
+          this.collide = function() {
+              if(this.x > characterX - 20 && this.x < characterX + 20 && characterY > this.y - 40 && characterY < this.y) {
+                  score = 0;
+              }
+          }
+          
+        }
+    </script>
+</head>
+
+<body>
+<form><input TYPE="button" onClick="history.go(0)" value="Reset"></form>
+    <div id="code" class="container-fluid">
+        <script src="https://gist-it.appspot.com/github/USERNAME/p5js/blob/master/FILENAME.html?footer=0"></script>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script>
+        $(window).bind("load", function() {
+            $('#code').before($('#defaultCanvas0').remove());
+        });
+    </script>
+</body>
+
+
+</html>
